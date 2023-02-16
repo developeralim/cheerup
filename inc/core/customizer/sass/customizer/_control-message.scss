@@ -1,0 +1,62 @@
+//
+// Message Control
+//
+.bunyad-cz-message {
+
+	.customize-control-title {
+		// margin-top: -px;
+	}
+
+	p:first-child {
+		margin-top: 0;
+	}
+	p:last-child {
+		margin-bottom: 0;
+	}
+
+	ul {
+		list-style: disc;
+		margin-left: 15px;
+	}
+
+	li {
+		margin-bottom: 12px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	
+	// Message Type: Info
+	&-info,
+	&-alert {
+		margin-left: -6px;
+		margin-right: -6px;
+		margin-bottom: 5px;
+		padding: 12px 9px;
+		border: 1px solid #d1e9f3;
+		border-left: 0;
+		border-right: 0;
+		background: #f2fbff;
+		color: #25596d;
+
+		.customize-control-title {
+			margin-top: -2px;
+			color: #105671;
+			font-weight: 700;
+		}
+	}
+
+	&-alert {
+		background: #fdf6e1;
+		border-color: #fbe9b3;
+		color: #775719;
+
+		.customize-control-title {
+			color: #61390e;
+		}
+
+		a {
+			color: #4e370a;
+		}
+	}
+}

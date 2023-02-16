@@ -1,0 +1,16 @@
+//
+// Gutenberg variables & mins
+//
+$black: #000;
+$dark-gray-500: #555d66;
+$dark-gray-300: #6c7781;
+$white: #fff;
+$border-width: 1px;
+
+@mixin switch-style__focus-active() {
+	box-shadow: 0 0 0 2px $white, 0 0 0 3px $dark-gray-300;
+
+	// Windows High Contrast mode will show this outline, but not the box-shadow.
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}

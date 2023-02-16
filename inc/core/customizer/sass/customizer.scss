@@ -1,0 +1,710 @@
+/**
+ * Customizer Controls and mods
+ */
+
+// Clearfix for any element
+@mixin clearfix() {
+	&::after {
+		display: block;
+		content: "";
+		clear: both;
+	}
+}
+
+// For consistency
+#customize-theme-controls {
+	-webkit-font-smoothing: antialiased;
+}
+
+// Make frame a big larger for smaller screens.
+@media screen and (min-width: 1440px) and (max-width: 1800px) {
+	.wp-full-overlay-sidebar {
+		width: 320px;
+	}
+
+	.wp-full-overlay.expanded {
+		margin-left: 320px;
+	}
+
+	.wp-full-overlay.collapsed .wp-full-overlay-sidebar {
+		margin-left: -320px;
+	}
+}
+
+// Our sections are with white bg
+.control-section[id^="sub-accordion-section-sphere"],
+.control-section[id^="sub-accordion-section-bunyad"] {
+	background: #fff !important;
+	padding: 18px !important;
+
+	.customize-section-title {
+		margin: -18px -18px 0 -18px;
+	}
+}
+
+//
+// Inputs and buttons
+// 
+input[type],
+select,
+textarea {
+	border-radius: 4px;
+	box-shadow: none;
+	font-size: 13px;
+}
+
+input[type="radio"] {
+	border-radius: 50%;
+}
+
+.customize-control .actions .button {
+	padding: 0 11px;
+	font-size: 12px;
+	line-height: 25px;
+}
+
+// Utility
+.bunyad-cz-hidden {
+	display: none !important;
+}
+
+/**
+ * Controls - native and custom.
+ */
+.customize-control-title {
+	margin-bottom: 6px;
+	color: #111213;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.customize-control {
+	position: relative;
+	margin-bottom: var(--bunyad-cz-control-mb, 17px);
+	margin-top: var(--bunyad-cz-control-mt, 0);
+
+	input:not([type="radio"]):not([type="checkbox"]) {
+		line-height: 1.55;
+	}
+
+	.description {
+		font-style: normal;
+	}
+
+	&-description:last-child {
+		margin-bottom: 0;
+	}
+
+	// Clear the margins
+	select {
+		width: calc(100% - 2px);
+	}
+
+	.attachment-media-view .button-add-media {
+		font-size: 12px;
+		padding: 6px 0;
+	}
+
+	&.sep-top:not(:first-child) {
+		border-top: 1px solid #eaeaea;
+    	padding-top: 17px;
+		margin-top: 5px;
+		
+		// Will throw-off bunyad-cz-reset alignment without this.
+		> :first-child {
+			position: relative;
+		}
+	}
+
+	&.sep-bottom:not(:last-child) {
+		border-bottom: 1px solid #eaeaea;
+		padding-bottom: 15px;
+	}
+
+	&.mb-small {
+		margin-bottom: 12px;
+	}
+}
+
+.customize-control-checkbox + .customize-control-checkbox {
+	margin-top: -8px;
+}
+
+#customize-controls .description {
+	color: #666;
+}
+
+.customize-control-radio label, 
+.customize-control-checkbox label,
+.customize-control-checkboxes label {
+	color: #111213;
+}
+
+// Controls Devices
+.bunyad-cz-devices {
+	display: inline-block;
+	margin-left: 7px;
+	vertical-align: top;
+
+	a {
+		color: #929292;
+		background: #f1f1f1;
+		border-radius: 50%;
+		vertical-align: middle;
+		text-decoration: none;
+		height: 20px;
+		width: 20px;
+		text-align: center;
+		display: inline-block;
+	}
+	
+	.active {
+		color: #333;
+	}
+
+	.dashicons {
+		font-size: 13px;
+		line-height: 20px;
+    	border-bottom: 0;
+	}
+}
+
+.bunyad-cz-device {
+	&-limit {
+		transform: scale(.92);
+		display: none;
+		margin-top: 12px;
+		width: 108%;
+		margin-left: -4%;
+		opacity: .9;
+
+		&.is-active {
+			display: block;
+		}
+	}
+}
+
+//
+// Reset to default setting.
+//
+.bunyad-cz-reset {
+	position: absolute;
+	opacity: 0;
+	top: 7px;
+	left: 0px;
+	transition: .25s ease;
+	width: 18px;
+	height: 100%;
+	transform: translateX(-102%);
+
+	a {
+		display: block;
+		text-decoration: none;
+		width: inherit;
+		height: 20px;
+		text-align: center;
+		visibility: hidden;
+	}
+
+	&.active {
+	}
+
+	.customize-control:not(.customize-control-group):hover & {
+		&.active {
+			opacity: 1;
+
+			// Keeping this in a to still allow pointer events on parent.
+			a {
+				visibility: visible;
+			}
+		}
+		
+		.icon-reset {
+			transform: rotate(25deg);
+		}
+	}
+
+	.icon-reset {
+		font-size: 11px;
+		width: 11px;
+		height: 11px;
+		transition: transform .25s;
+		transform: rotate(-45deg);
+	}
+}
+
+
+//
+// Controls Groups
+//
+.bunyad-cz-group {
+
+	.group-head {
+		
+	}
+
+	button {
+		background: transparent;
+	}
+
+	// Clearfix
+	.controls {
+		@include clearfix;
+	}
+
+	&-collapsible {
+		--bunyad-cz-control-mt: 17px;
+		--bunyad-cz-control-mb: 0;
+		--bunyad-cz-inline-plus-mt: 12px;
+
+		margin-left: -18px;
+		margin-right: -18px;
+		// border: 1px solid #e2e4e7;
+		border-left: 0;
+		border-right: 0;
+		box-shadow: 0 -9px 0 #eee, 0 9px 0 #eee;
+
+		& & {
+			border: 1px solid #e2e4e7;
+			border-left: 0;
+			border-right: 0;
+			box-shadow: none;
+		}
+
+		// Nested
+		.controls & {
+			margin: 0 -6px;
+		}
+
+		&.is-active {
+			> .group-head .hl-arrow {
+				transform: translateY(-50%) rotate(180deg);
+			}
+
+			> .group-content {
+				display: block;
+			}
+		}
+
+		// .controls > :last-child {
+		// 	margin-bottom: 0;
+		// }
+
+		> .group-head .head-label {
+			box-sizing: border-box;
+			border: none;
+			box-shadow: none;
+			font-weight: 600;
+			outline: none;
+			padding: 9px 12px;
+			position: relative;
+			text-align: left;
+			transition: background .1s ease-in-out;
+			width: 100%;
+			// background: #f8f9f9;
+			cursor: pointer;
+
+			.title {
+				margin-bottom: 0;
+				color: #222;
+				font-weight: 600;
+			}
+		}
+
+		.hl-arrow {
+			color: #555;
+			fill: currentColor;
+			position: absolute;
+			right: 12px;
+			top: 50%;
+			transform: translateY(-50%);
+			transition: color .1s ease-in-out;
+			width: 22px;
+			height: 22px;
+		}
+
+		.group-content {
+			display: none;
+			padding: 20px 19px;
+			// padding-top: 15px;
+			padding-top: 0;
+			margin-top: -3px;
+
+			> .description {
+				margin-top: 15px;
+				display: block;
+			}
+		}
+
+		.customize-control-checkbox {
+			& + & {
+				margin-top: 0;
+			}
+		}
+	}
+
+	&-edit {
+		--bunyad-cz-control-mt: 0;
+		--bunyad-cz-control-mb: 17px;
+		--bunyad-cz-inline-plus-mt: -5px;
+
+		.group-head {
+			display: flex;
+		}
+
+		.group-content {
+			margin: 0px -18px;
+			margin-top: 13px;
+			margin-bottom: 10px;
+			padding: 0 15px;
+			padding-top: 20px;
+			padding-bottom: 8px;
+			box-shadow: 0px 0 15px rgba(0, 0, 0, 0.13);
+		}
+		
+		.customize-control-title {
+		}
+
+		.head-label {
+			display: flex;
+			margin-right: 15px;
+			flex-direction: column;
+			justify-content: center;
+			
+		}
+
+		.head-edit {
+			display: flex;
+			flex-shrink: 0;
+			margin-left: auto;
+			background: #fff;
+			width: 60px;
+			height: 28px;
+			border: 1px solid #e1e1e1;
+			border-color: #7e8993;
+			border-radius: 3px;
+			justify-content: center;
+			align-items: center;
+			color: #444;
+
+			.icon {
+				width: auto;
+				height: auto;
+				font-size: 18px;
+			}
+		}
+
+		.group-content {
+			display: none;
+		}
+
+	}
+}
+
+.bunyad-cz-control-collapsible {
+	margin: 26px 0;
+	margin-top: 9px;
+
+	& + & {
+		margin-top: -17px;
+	}
+
+	& & {
+		margin-top: 26px;
+	}
+
+	&:last-child {
+		margin-bottom: -9px;	
+	}
+}
+
+// Bunyad Controls
+.bunyad-cz-control {
+	&-inline {
+
+		& + & {
+			margin-top: var(--bunyad-cz-inline-plus-mt, -5px);
+		}
+
+		.control-wrap {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.customize-control-notifications-container {
+			order: 4;
+			width: 100%;
+		}
+
+		.customize-control-title {
+			width: 45%;
+			margin-right: 10px;
+		}
+
+		.description {
+			order: 3;
+		}
+
+		.customize-control-content {
+			width: calc(55% - 10px);
+			margin-left: auto;
+		}
+	}
+
+	// Smaller control content variation
+	&-inline-sm {
+	
+		.bunyad-cz-device-limit.is-active {
+			display: none;
+		}
+
+		.control-wrap {
+			display: grid;
+			grid-template-rows: auto auto;
+			grid-template-columns: minmax(50%, auto) 1fr;
+		}
+
+		.description {
+			order: 3;
+			grid-column: span 2;
+			margin-top: 6px;
+		}
+
+		.customize-control-content {
+			grid-column: 2;
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		.customize-control-title {
+			margin-bottom: 0;
+			padding-right: 20px;
+		}
+
+		// Specific changes
+		.bunyad-cz-toggle {
+			margin-top: 2px;
+			margin-right: 1px; // A little spacing illusion
+		}
+
+		input[type="number"] {
+			width: 55px;
+			font-size: 12px;
+		}
+	}
+
+	//
+	// Columns
+	//
+	&-cols-2 {
+		.customize-control-content > ul {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+
+		&.bc-sort {
+
+			.customize-control-content > ul {
+				grid-gap: 2px;
+				margin-left: -10px;
+				margin-right: -10px;
+	
+				li {
+					display: flex;
+					margin: 0;
+					padding: 5px 8px;
+					background: #f8f8f8;
+					box-sizing: border-box;
+				}
+
+				label {
+					transform: scale(0.95);
+				}
+
+				input {
+					margin-right: 3px;
+				}
+			}
+	
+			.icon-handle {
+				margin-left: auto;
+				opacity: 0.25;
+				transform: scale(0.95);
+				cursor: move;
+			}
+		}
+	}
+}
+
+// Slider modifications
+.customize-control-bunyad-slider {
+	.customize-control-content {
+		margin-top: 5px;
+	}
+}
+
+@import 'customizer/control-slider';
+@import 'customizer/control-toggle';
+@import 'customizer/control-dimensions';
+@import 'customizer/control-message';
+@import 'customizer/control-radio';
+@import 'customizer/control-color-alpha';
+
+.customize-control-bunyad-textarea {
+	textarea {
+		width: 100%;
+		resize: vertical;
+	}
+}
+
+//
+// Sections & Panels
+//
+.control-section .accordion-section-title, 
+.customize-pane-child .accordion-section-title {
+	padding: 9px 10px 10px 15px;
+}
+
+#customize-theme-controls .accordion-section-title, 
+#customize-outer-theme-controls .accordion-section-title {
+	color: #222529;
+	border-color: #ececec;
+
+	&:after {
+		color: #8b9096;
+    	font-size: 16px;
+    	top: calc(50% - 8px);
+	}
+}
+
+#customize-controls .customize-section-description {
+	color: inherit;
+}
+
+#customize-controls h3 {
+	font-size: 13px;
+	font-weight: 500;
+	color: #222529;
+}
+
+// Pseudo Section: Heading 
+.control-section-bunyad-heading {
+	display: block !important;
+	height: auto !important; // prevent slideUp animation
+
+	.the-title {
+		padding: 9px 10px 10px 19px;
+		margin-bottom: 0;
+		border: 1px solid #ececec;
+		border-left: 0;
+		border-right: 0;
+		background: #fff;
+		color: #6b7177 !important;
+		font-size: 11px !important;
+		text-transform: uppercase;
+		letter-spacing: 0.035em;
+	}
+}
+
+// Pseudo Section: Message
+.control-section-bunyad-message {
+	display: block !important;
+	height: auto !important; // prevent slideUp animation
+	border: none !important;
+	padding-left: 5px;
+	padding-right: 5px;
+
+	> div {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding-left: 14px;
+    	padding-right: 14px;
+	}
+	
+	&:nth-child(2) {
+		margin-top: -7px;
+	}
+}
+
+// Space Below
+.control-panel,
+.control-section {
+	&.spacing-below {
+		margin-bottom: 12px;
+	}
+}
+
+// Section navigations
+.bunyad-cz-section-nav {
+	position: relative;
+	background: #fff;
+	border-top: 1px solid #efefef;
+    padding: 10px;
+    padding-left: 15px;
+}
+
+//
+// Specifics
+//
+.customize-control-typography .sub-label {
+	width: 20%;
+	display: inline-block;
+}
+
+.customize-control-typography + .customize-control-typography {
+	margin-top: 5px;
+	border-top: 1px solid #d9d9d9;
+	padding-top: 15px;
+}
+
+.button.reset-customizer {
+	margin-top: 10px;	
+}
+
+#customize-control-home_carousel {
+	margin-top: 10px;
+	border-top: 1px solid #d9d9d9;
+	padding-top: 15px;	
+}
+
+
+/* Customizer 4.5 preview for tablets matching iPad */
+.wp-customizer .preview-tablet .wp-full-overlay-main {
+	margin-left: -384px;
+	width: 768px;
+	height: 1024px;
+}
+
+/* Matching iPhone 6 */
+.wp-customizer .preview-mobile .wp-full-overlay-main {
+	margin-left: -207px;
+	width: 414px;
+	height: 736px;
+}
+
+/* Show Desc */
+#sub-accordion-panel-sphere-social-followers .customize-info .description {
+	display: block;
+}
+
+//
+// Tooltips: Used in Radio Image controls for presets.
+//
+.bunyad-tooltip {
+	position: absolute;
+	z-index: 999999;
+	max-width: 300px;
+	padding: 20px;
+	color: #fff;
+	background: #222;
+	border-radius: 3px;
+}
+
+.bunyad-cz-tooltip {
+	max-width: 500px;
+
+	> img {
+		max-width: 100%;
+		height: auto;
+	}
+}
